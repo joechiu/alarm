@@ -41,6 +41,8 @@ class icon:
     # menu, schedule
     timer = "images/alarm-timer.png"
     clock = "images/alarm-clock.png"
+    app = 'icon.ico'
+    msg = 'message.ico'
     
 class t:
     # alarm tool bar
@@ -57,14 +59,15 @@ class t:
     snooze = "Snooze the selected alarm"
     exit = "Exit the schedule menu"
     icon = 'icon.ico'
+    msgicon = 'message.ico'
     snzStat = ' by 1 minute - click ALT key to change'
     # system tray
     show = "Open Alarm Clock"
     hide = "Minimize Application to Tray"
     quit = "Exit"
     traytitle = TITLE
-    trayAud = "Alarm %d: '%s' audio alarm is triggered"
-    trayMsg = "Alarm %d: '%s' message alarm is triggered"
+    trayAud = "Alarm: No.%d\nName: %s\nAudio: '%s'"
+    trayMsg = "Alarm: No.%d\nName: %s\nMessage: '%s'"
     close = "Alarm Clock was minimized to Tray"
     tools = "Tools"
     ready = "Ready"

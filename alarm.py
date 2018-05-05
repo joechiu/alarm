@@ -174,7 +174,8 @@ class Alarm(QMainWindow):
             # increment / decrement switch 
             self.alt = not self.alt
         else:
-            super(ToolBar, self).keyPressEvent(event)
+            print("end of items")
+            # super(ToolBar, self).keyPressEvent(event)
     
     def event(self, event):
         if (event.type()==QEvent.KeyPress) and (event.key()==Qt.Key_Tab):
@@ -201,14 +202,15 @@ class Alarm(QMainWindow):
             setattr(self, kk, vv)
             
     # create color button
-    def ccb(self, img):
+    def ccb(self, img, w=80, h=80):
         pix = QPixmap(img)
         p = QPainter(pix)
         p.setRenderHint(QPainter.Antialiasing)
         p.setBrush(QColor(0,0,255,40))
         pen = QPen(Qt.transparent, 1);
         p.setPen(pen)
-        p.drawRect(0, 0, 80, 80)
+        p.drawRect(0, 0, w, h)
+        p.end()
         return pix
                 
     def new(self):
@@ -303,11 +305,14 @@ class Alarm(QMainWindow):
         self.trayMsg(c.t.close)
         self.hide()
     
-    def trayMsg(self, msg, t=1000):
+    def trayMsg(self, msg, img=None):
+        if not img: img = QIcon(c.icon.app)
+        # img = QSystemTrayIcon.Information
+        t = 1000 
         self.tray_icon.showMessage(
             c.t.traytitle,
             msg,
-            QSystemTrayIcon.Information,
+            img,
             t
         )
       
@@ -316,4 +321,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     tb = Alarm()
     tb.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())    
+    

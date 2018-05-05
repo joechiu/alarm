@@ -147,6 +147,13 @@ class Menu(QTableWidget):
     def initTable(self):
         
         # setup rows and columns settings for the table
+        self.setAcceptDrops(c.T)
+        self.setDragEnabled(c.T)
+        self.setSelectionBehavior(QTableView.SelectRows)
+        self.setDragDropMode(QAbstractItemView.InternalMove)
+        self.setDragDropOverwriteMode(c.F)
+        self.setDropIndicatorShown(c.F)
+        
         self.setColumnCount(self.COL)
         self.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.header = self.horizontalHeader()
@@ -477,9 +484,9 @@ class Menu(QTableWidget):
                 self.initAudio(i, p['aud'])
                 self.playAudio(i)
                 self.setLoop(i, p['r'])
-                self.alarm.trayMsg(c.t.trayAud % (i+1, p['name']))
+                self.alarm.trayMsg(c.t.trayAud % (i+1, p['name'], p['aud']))
             else:
-                self.alarm.trayMsg(c.t.trayMsg % (i+1, p['name']))
+                self.alarm.trayMsg(c.t.trayMsg % (i+1, p['name'], p['msg']), QIcon(c.icon.msg))
                 run = runit(p['id'])
                 self.threadpool.start(run)
         
@@ -597,8 +604,16 @@ class Menu(QTableWidget):
         if items:
             try: 
                 i = self.currentRow()
+                h = self.h[i]
                 cb = self.a.cb(i).c
                 self.alarm.okAct.setChecked(cb.isChecked())
+                hms = "[%02d:%02d:%02d]" % self.timeset(i)
+                if h['a']:
+                    mode = "Audio"
+                else:
+                    mode = "Message: "
+                msg = "%d. %s %s %s" % ((i+1), hms, mode, h['msg'])
+                self.alarm.statusBar().showMessage(msg)
                 
                 if self.a.anim(i): 
                     self.alarm.stopAct.setEnabled(c.T)
@@ -619,7 +634,6 @@ class Menu(QTableWidget):
             # self.msgBox(c.t.noitem)
             self.alarm.trayMsg(c.t.noitem)
             return
-        print(idx)
         row = idx.row()
         col = idx.column()
         self.cbck(row, c.T)
@@ -644,4 +658,3 @@ class Menu(QTableWidget):
 
     def msgBox(self, msg):
         QMessageBox.about(self, c.t.TITLE, msg)
-        
