@@ -175,7 +175,7 @@ class Alarm(QMainWindow):
             self.alt = not self.alt
         else:
             print("end of items")
-            # super(ToolBar, self).keyPressEvent(event)
+            super(Alarm, self).keyPressEvent(event)
     
     def event(self, event):
         if (event.type()==QEvent.KeyPress) and (event.key()==Qt.Key_Tab):
