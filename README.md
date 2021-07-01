@@ -1,6 +1,6 @@
 # pyqt5 alarm clock Widget
 
-QT5 Alarm Clock Widget is a portable fully-featured alarm clock for the Windows panel or equivalent by python QT5. It's easy to use yet powerful with support for multiple repeatable alarms, as well as snoozing and a flexible notification features.
+QT5 Alarm Clock Widget is a portable fully-featured alarm clock for the Windows panel or Linux OS by python QT5. It's easy to use yet powerful with the supports of multiple repeatable alarms, customized snoozing and flexible notification features.
 
 ## Synopsis
 
